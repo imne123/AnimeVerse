@@ -1,18 +1,23 @@
 import './style.css';
 
-document.querySelector('#app').innerHTML = `
-    <header>
-        <h1>AnimeVerse</h1>
-    </header>
+const animeContainer = document.querySelector('#app');
 
-    <main>
-        <section class="controls">
-            <input type="text" placeholder="Search anime...">
-        </section>
+const fetchAnime = async () => {
+    try {
+        const response = await fetch('https://api.jikan.moe/v4/top/anime');
 
-        <section id="anime-container"></section>
-    </main>
-`;
+        const data = await response.json();
 
-console.log('AnimeVerse loaded');
+        console.log(data);
+
+        animeContainer.innerHTML = `
+            <h1>AnimeVerse</h1>
+            <p>Top anime loaded successfully!</p>
+        `;
+    } catch (error) {
+        console.error('Error fetching anime:', error);
+    }
+};
+
+fetchAnime();
 
