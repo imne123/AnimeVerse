@@ -1,6 +1,6 @@
 import './style.css';
 
-const animeContainer = document.querySelector('#app');
+const app = document.querySelector('#app');
 
 const fetchAnime = async () => {
     try {
@@ -8,16 +8,30 @@ const fetchAnime = async () => {
 
         const data = await response.json();
 
-        console.log(data);
+        const animeList = data.data;
 
-        animeContainer.innerHTML = `
+        app.innerHTML = `
             <h1>AnimeVerse</h1>
-            <p>Top anime loaded successfully!</p>
+            <div id="anime-container"></div>
         `;
+
+        const animeContainer = document.querySelector('#anime-container');
+
+        animeList.forEach(anime => {
+            animeContainer.innerHTML += `
+                <div class="anime-card">
+                    <img src="${anime.images.jpg.image_url}" alt="${anime.title}">
+                    <h2>${anime.title}</h2>
+                    <p>⭐ Score: ${anime.score}</p>
+                </div>
+            `;
+        });
+
     } catch (error) {
-        console.error('Error fetching anime:', error);
+        console.error('Error:', error);
     }
 };
 
 fetchAnime();
+
 
