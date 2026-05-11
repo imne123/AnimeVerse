@@ -69,3 +69,12 @@ input {
     color: #c084fc;
 }
 
+#search {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+}
+
