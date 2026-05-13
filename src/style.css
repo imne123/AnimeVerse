@@ -78,3 +78,12 @@ input {
     font-size: 16px;
 }
 
+#score-filter {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+}
+
