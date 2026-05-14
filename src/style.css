@@ -95,3 +95,21 @@ input {
     border: none;
     font-size: 16px;
 }
+
+
+.favorite-btn {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #c084fc;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+}
+
+.favorite-btn:hover {
+    opacity: 0.8;
+}
+
+
