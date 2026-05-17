@@ -4,6 +4,8 @@ const app = document.querySelector('#app');
 
 let animeList = [];
 
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
 const displayAnime = (animes) => {
     const animeContainer = document.querySelector('#anime-container');
 
@@ -14,7 +16,14 @@ const displayAnime = (animes) => {
             <div class="anime-card">
                 <img src="${anime.images.jpg.image_url}" alt="${anime.title}">
                 <h2>${anime.title}</h2>
-                <p>⭐ Score: ${anime.score}</p>
+
+<p>⭐ Score: ${anime.score}</p>
+
+<button class="favorite-btn" data-id="${anime.mal_id}">
+    ❤️ Favoriet
+</button>
+
+                
             </div>
         `;
     });
@@ -59,6 +68,31 @@ const fetchAnime = async () => {
         `;
 
         displayAnime(animeList);
+
+
+
+
+        document.addEventListener('click', (event) => {
+
+    if (event.target.classList.contains('favorite-btn')) {
+
+        const animeId = event.target.dataset.id;
+
+        if (!favorites.includes(animeId)) {
+
+            favorites.push(animeId);
+
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+
+            alert('Anime toegevoegd aan favorieten ❤️');
+
+        } else {
+
+            alert('Anime zit al in favorieten');
+
+        }
+    }
+});
 
         const searchInput = document.querySelector('#search');
 
@@ -121,5 +155,30 @@ sortAnime.addEventListener('change', () => {
 };
 
 fetchAnime();
+
+const cards = document.querySelectorAll('.anime-card');
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            entry.target.style.opacity = '1';
+
+        }
+
+    });
+
+});
+
+cards.forEach(card => {
+
+    card.style.opacity = '0';
+
+    observer.observe(card);
+
+});
+
 
 
